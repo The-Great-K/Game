@@ -4,22 +4,20 @@ import javax.swing.JFrame;
 
 public class Main {
 	public static void main(String[] args) {
-		JFrame window = new JFrame();
+		JFrame window = new JFrame("Game");
+
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
-		window.setTitle("Game");
-
-		window.setLocationRelativeTo(null);
 		window.setUndecorated(true);
-		window.setVisible(true);
 
 		GamePanel gp = new GamePanel();
+		gp.startGameThread();
 		window.add(gp);
-
 		window.pack();
 
-		GamePanel.device.setFullScreenWindow(window);
+		window.setLocationRelativeTo(null);
+		window.setVisible(true);
 
-		gp.startGameThread();
+		GamePanel.device.setFullScreenWindow(window);
 	}
 }

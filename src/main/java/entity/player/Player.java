@@ -14,7 +14,7 @@ public class Player extends Entity {
 	@Override
 	public void update(GamePanel gp) {
 		if (gp.keyH.w == true) {
-			this.y += 5;
+			this.y -= 5;
 		}
 	}
 
