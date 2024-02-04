@@ -10,7 +10,7 @@ public abstract class Entity extends Object {
 	public GamePanel gp;
 	public Graphics2D g2;
 
-	public int x, y;
+	public double x, y;
 	public double rotation;
 	public int width, height;
 
@@ -18,7 +18,7 @@ public abstract class Entity extends Object {
 
 	public Rectangle hitbox = new Rectangle(1, 1);
 
-	public Entity(GamePanel gp, int x, int y, int width, int height) {
+	public Entity(GamePanel gp, double x, double y, int width, int height) {
 		this.gp = gp;
 		setX(x);
 		setY(y);
@@ -26,7 +26,7 @@ public abstract class Entity extends Object {
 		setHeight(height);
 	}
 
-	public Entity(GamePanel gp, int x, int y) {
+	public Entity(GamePanel gp, double x, double y) {
 		this.gp = gp;
 		setX(x);
 		setY(y);
@@ -48,11 +48,11 @@ public abstract class Entity extends Object {
 
 	public abstract void render(Graphics2D g2);
 
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 
@@ -64,20 +64,28 @@ public abstract class Entity extends Object {
 		return height;
 	}
 
+	public int getXAsInt() {
+		return (int) x;
+	}
+
+	public int getYAsInt() {
+		return (int) y;
+	}
+
 	public void setX(int x) {
-		this.x = x;
+		this.x = (double) x;
 	}
 
 	public void setX(double x) {
-		this.x = (int) x;
+		this.x = x;
 	}
 
 	public void setY(int y) {
-		this.y = y;
+		this.y = (double) y;
 	}
 
 	public void setY(double y) {
-		this.y = (int) y;
+		this.y = y;
 	}
 
 	public void setWidth(int width) {

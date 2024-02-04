@@ -3,7 +3,7 @@ package main.java.ui.screens.game;
 import java.awt.Graphics2D;
 
 import main.java.GamePanel;
-import main.java.entity.player.Player;
+import main.java.entity.movable.player.Player;
 import main.java.ui.Screen;
 
 public class GameScreen extends Screen {

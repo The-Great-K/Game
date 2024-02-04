@@ -3,8 +3,10 @@ package main.java;
 import javax.swing.JFrame;
 
 public class Main {
+	public static JFrame window;
+
 	public static void main(String[] args) {
-		JFrame window = new JFrame("Game");
+		window = new JFrame("Game");
 
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
@@ -17,7 +19,5 @@ public class Main {
 
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
-
-		GamePanel.device.setFullScreenWindow(window);
 	}
 }

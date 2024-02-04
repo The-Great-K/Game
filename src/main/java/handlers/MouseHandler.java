@@ -36,6 +36,12 @@ public class MouseHandler extends MouseAdapter {
 		location.y = e.getY();
 	}
 
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		location.x = e.getX();
+		location.y = e.getY();
+	}
+
 	public int getX() {
 		return location.x;
 	}

@@ -65,7 +65,7 @@ public class Button extends Entity implements OnClickFunctionEntity {
 
 	@Override
 	public void update(GamePanel gp) {
-		this.hitbox = new Rectangle(x, y, width, height);
+		this.hitbox = new Rectangle(getXAsInt(), getYAsInt(), getWidth(), getHeight());
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class Button extends Entity implements OnClickFunctionEntity {
 
 		BufferedImage image = this.image;
 
-		g2.drawImage(image, x, y, width, height, null);
+		g2.drawImage(image, getXAsInt(), getYAsInt(), getWidth(), getHeight(), null);
 
 		g2.setColor(Color.red);
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, (int) (GamePanel.tileSize * 1.5)));
@@ -83,13 +83,13 @@ public class Button extends Entity implements OnClickFunctionEntity {
 
 	public int getXForCenteredText(String text) {
 		int width = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-		int x = this.x + this.width / 2 - width / 2;
+		int x = getXAsInt() + getWidth() / 2 - width / 2;
 		return x;
 	}
 
 	public int getYForCenteredText(String text) {
 		int height = (int) g2.getFontMetrics().getStringBounds(text, g2).getHeight();
-		int y = this.y + this.height / 2 + height / 3;
+		int y = getYAsInt() + getHeight() / 2 + height / 3;
 		return y;
 	}
 

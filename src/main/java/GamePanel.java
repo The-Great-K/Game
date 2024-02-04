@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 
 import javax.swing.JPanel;
@@ -24,7 +22,6 @@ public class GamePanel extends JPanel implements Runnable {
 	public static final int TPS = 60;
 
 	public static Dimension screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
-	public static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 
 	public static int tileSize = (int) Math.floor(screenDimensions.getHeight() / 36);
 
@@ -32,6 +29,8 @@ public class GamePanel extends JPanel implements Runnable {
 	public Pointer pointer = new Pointer(this);
 
 	public KeyHandler keyH = new KeyHandler(this);
+
+	public static int gravity = 10;
 
 	public UI ui = new UI(this);
 	public static GameState gameState = GameState.TITLE_STATE;
@@ -83,6 +82,9 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void update() {
+		this.setPreferredSize(screenDimensions);
+		tileSize = (int) Math.floor(screenDimensions.getHeight() / 36);
+
 		ui.update(this);
 		pointer.update(this, mouseH);
 	}
@@ -103,6 +105,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public void logConsole() {
 		System.out.println(ScreenInit.gameScreen.player.toString());
 		System.out.println(keyH.w);
+		System.out.println(screenDimensions.toString());
 
 		System.out.println();
 	}

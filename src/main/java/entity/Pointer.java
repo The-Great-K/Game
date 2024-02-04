@@ -20,7 +20,7 @@ public class Pointer extends Entity {
 	@Override
 	public void render(Graphics2D g2) {
 		g2.setColor(Color.red);
-		g2.drawRect(x, y, width, height);
+		g2.drawRect(getXAsInt(), getYAsInt(), getWidth(), getHeight());
 	}
 
 	@Override
