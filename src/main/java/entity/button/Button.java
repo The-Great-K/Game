@@ -24,7 +24,6 @@ public class Button extends Entity implements OnClickFunctionEntity {
 
 	public String dimensionsString;
 	public String text;
-
 	public Dimension dimensions;
 
 	public Button(GamePanel gp, Button.Properties p) {

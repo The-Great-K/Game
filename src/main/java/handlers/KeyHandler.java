@@ -11,6 +11,8 @@ public class KeyHandler extends KeyAdapter {
 	// IF THESE ARE PRESSED DOWN
 	public boolean w, a, s, d;
 
+	public boolean jumping = false;
+
 	public KeyHandler(GamePanel gp) {
 		this.gp = gp;
 
@@ -21,7 +23,7 @@ public class KeyHandler extends KeyAdapter {
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
 
-		if (code == KeyEvent.VK_W) {
+		if (code == KeyEvent.VK_W && !jumping) {
 			w = true;
 		}
 		if (code == KeyEvent.VK_A) {

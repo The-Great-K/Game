@@ -8,22 +8,25 @@ import main.java.entity.movable.MovableEntity;
 
 public class Player extends MovableEntity {
 	public Player(GamePanel gp) {
-		super(gp, 100, 100, 100, 100);
+		super(gp, GamePanel.tileSize, GamePanel.tileSize, 100, 100);
 	}
 
 	public void moveKeys(GamePanel gp) {
 		if (gp.keyH.w) {
-			moveY = -4;
+			gp.keyH.w = false;
+			moveY = -12;
+			fallTime = 0;
+			gp.keyH.jumping = true;
 		}
-		if (gp.keyH.a) {
+
+		if (gp.keyH.a && gp.keyH.d)
+			moveX = 0;
+		else if (gp.keyH.a)
 			moveX = -4;
-		}
-		if (gp.keyH.s) {
-			moveY = 4;
-		}
-		if (gp.keyH.d) {
+		else if (gp.keyH.d)
 			moveX = 4;
-		}
+		else
+			moveX = 0;
 	}
 
 	@Override
@@ -32,8 +35,7 @@ public class Player extends MovableEntity {
 
 		move();
 
-		moveX = 0;
-		moveY = 0;
+		fallTime += 1;
 	}
 
 	@Override

@@ -4,7 +4,9 @@ import main.java.GamePanel;
 import main.java.entity.Entity;
 
 public abstract class MovableEntity extends Entity {
-	public static int gravity = 1;
+	public static double gravity = 0.5;
+
+	public double fallTime = 0.0;
 
 	public double moveX = 0.0, moveY = 0.0;
 	public double speed;
@@ -14,6 +16,8 @@ public abstract class MovableEntity extends Entity {
 	}
 
 	public void move() {
+		moveY += Math.max(0.5, (fallTime / GamePanel.TPS) * gravity);
+
 		setX(getX() + moveX);
 		setY(getY() + moveY);
 	}

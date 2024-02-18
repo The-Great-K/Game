@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import main.java.entity.Pointer;
 import main.java.handlers.KeyHandler;
 import main.java.handlers.MouseHandler;
+import main.java.tiles.Tile;
+import main.java.tiles.TileManager;
 import main.java.ui.GameState;
 import main.java.ui.ScreenInit;
 import main.java.ui.UI;
@@ -32,6 +34,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public static int gravity = 10;
 
+	public TileManager tm = new TileManager(this);
+	public Tile[][] map;
+
 	public UI ui = new UI(this);
 	public static GameState gameState = GameState.TITLE_STATE;
 
@@ -40,11 +45,13 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setDoubleBuffered(true);
 		this.setLayout(null);
 		this.setFocusable(true);
+		this.setPreferredSize(screenDimensions);
 	}
 
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
+		map = tm.readMap("resources/maps/map.lvtn");
 	}
 
 	@Override
@@ -82,9 +89,6 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	public void update() {
-		this.setPreferredSize(screenDimensions);
-		tileSize = (int) Math.floor(screenDimensions.getHeight() / 36);
-
 		ui.update(this);
 		pointer.update(this, mouseH);
 	}
@@ -98,6 +102,8 @@ public class GamePanel extends JPanel implements Runnable {
 		ui.render(g2);
 
 		pointer.render(g2);
+
+		tm.renderMap(g2, map.length, map);
 
 		g2.dispose();
 	}
