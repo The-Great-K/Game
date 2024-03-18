@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import main.java.GamePanel;
 import main.java.entity.Entity;
 import main.java.entity.interfaces.OnClickFunctionEntity;
+import main.java.handlers.MouseHandler;
 import main.java.ui.GameState;
 
 public class Button extends Entity implements OnClickFunctionEntity {
@@ -27,7 +28,7 @@ public class Button extends Entity implements OnClickFunctionEntity {
 	public Dimension dimensions;
 
 	public Button(GamePanel gp, Button.Properties p) {
-		super(gp, p.x, p.y, p.width, p.height);
+		super(p.x, p.y, p.width, p.height);
 
 		this.dimensionsString = p.dimensionsString;
 		this.text = p.text;
@@ -64,7 +65,19 @@ public class Button extends Entity implements OnClickFunctionEntity {
 
 	@Override
 	public void update(GamePanel gp) {
-		this.hitbox = new Rectangle(getXAsInt(), getYAsInt(), getWidth(), getHeight());
+		this.hitbox = new Rectangle(getX(), getY(), getWidth(), getHeight());
+
+		if (isTouching(GamePanel.p)) {
+			if (MouseHandler.clicked) {
+				clickChecker = true;
+			} else if (clickChecker && MouseHandler.released) {
+				onClick();
+				clickChecker = false;
+				MouseHandler.released = false;
+			}
+		} else {
+			clickChecker = false;
+		}
 	}
 
 	@Override
@@ -73,7 +86,17 @@ public class Button extends Entity implements OnClickFunctionEntity {
 
 		BufferedImage image = this.image;
 
-		g2.drawImage(image, getXAsInt(), getYAsInt(), getWidth(), getHeight(), null);
+		g2.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
+
+		if (!isTouching(GamePanel.p)) {
+			g2.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
+		} else {
+			if (MouseHandler.clicked) {
+				g2.drawImage(clickedImage, getX(), getY(), getWidth(), getHeight(), null);
+			} else {
+				g2.drawImage(hoveringImage, getX(), getY(), getWidth(), getHeight(), null);
+			}
+		}
 
 		g2.setColor(Color.red);
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, (int) (GamePanel.tileSize * 1.5)));
@@ -82,13 +105,13 @@ public class Button extends Entity implements OnClickFunctionEntity {
 
 	public int getXForCenteredText(String text) {
 		int width = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-		int x = getXAsInt() + getWidth() / 2 - width / 2;
+		int x = getX() + getWidth() / 2 - width / 2;
 		return x;
 	}
 
 	public int getYForCenteredText(String text) {
 		int height = (int) g2.getFontMetrics().getStringBounds(text, g2).getHeight();
-		int y = getYAsInt() + getHeight() / 2 + height / 3;
+		int y = getY() + getHeight() / 2 + height / 3;
 		return y;
 	}
 

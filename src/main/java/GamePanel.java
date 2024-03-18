@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
-import main.java.entity.Pointer;
+import main.java.entity.Entity;
 import main.java.handlers.KeyHandler;
 import main.java.handlers.MouseHandler;
 import main.java.tiles.Tile;
@@ -25,10 +25,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public static Dimension screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
 
-	public static int tileSize = (int) Math.floor(screenDimensions.getHeight() / 36);
+	public static int tileSize = (int) Math.floor(screenDimensions.getHeight() / 27);
 
 	public MouseHandler mouseH = new MouseHandler(this);
-	public Pointer pointer = new Pointer(this);
+	public static P p = new P();
 
 	public KeyHandler keyH = new KeyHandler(this);
 
@@ -90,7 +90,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void update() {
 		ui.update(this);
-		pointer.update(this, mouseH);
+		p.update(this);
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 		ui.render(g2);
 
-		pointer.render(g2);
+		p.render(g2);
 
 		tm.renderMap(g2, map.length, map);
 
@@ -114,5 +114,21 @@ public class GamePanel extends JPanel implements Runnable {
 		System.out.println(screenDimensions.toString());
 
 		System.out.println();
+	}
+
+	public static class P extends Entity {
+		public P() {
+			this.hitbox.width = 1;
+			this.hitbox.height = 1;
+		}
+
+		@Override
+		public void update(GamePanel gp) {
+			this.hitbox.setLocation((int) gp.mouseH.location.getX(), (int) gp.mouseH.location.getY());
+		}
+
+		@Override
+		public void render(Graphics2D g2) {
+		}
 	}
 }

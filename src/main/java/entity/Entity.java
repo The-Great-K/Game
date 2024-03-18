@@ -17,23 +17,21 @@ public abstract class Entity extends Object {
 	public BufferedImage image;
 
 	public Rectangle hitbox = new Rectangle(1, 1);
+	protected boolean clickChecker = false;
 
-	public Entity(GamePanel gp, double x, double y, int width, int height) {
-		this.gp = gp;
+	public Entity(double x, double y, int width, int height) {
 		setX(x);
 		setY(y);
 		setWidth(width);
 		setHeight(height);
 	}
 
-	public Entity(GamePanel gp, double x, double y) {
-		this.gp = gp;
+	public Entity(double x, double y) {
 		setX(x);
 		setY(y);
 	}
 
-	public Entity(GamePanel gp) {
-		this.gp = gp;
+	public Entity() {
 	}
 
 	public boolean isTouching(Entity entity) {
@@ -48,11 +46,11 @@ public abstract class Entity extends Object {
 
 	public abstract void render(Graphics2D g2);
 
-	public double getX() {
+	public double getXAsDouble() {
 		return x;
 	}
 
-	public double getY() {
+	public double getYAsDouble() {
 		return y;
 	}
 
@@ -64,11 +62,11 @@ public abstract class Entity extends Object {
 		return height;
 	}
 
-	public int getXAsInt() {
+	public int getX() {
 		return (int) x;
 	}
 
-	public int getYAsInt() {
+	public int getY() {
 		return (int) y;
 	}
 

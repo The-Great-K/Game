@@ -43,7 +43,7 @@ public class Player extends MovableEntity {
 		this.g2 = g2;
 
 		g2.setColor(Color.red);
-		g2.drawRect(getXAsInt(), getYAsInt(), getWidth(), getHeight());
-		g2.drawString("Player", getXAsInt(), getYAsInt());
+		g2.drawRect(getX(), getY(), getWidth(), getHeight());
+		g2.drawString("Player", getX(), getY());
 	}
 }

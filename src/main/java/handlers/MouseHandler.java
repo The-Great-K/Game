@@ -11,7 +11,8 @@ public class MouseHandler extends MouseAdapter {
 
 	public Point location = new Point(0, 0);
 
-	public boolean mouseDown = false;
+	public static boolean clicked = false;
+	public static boolean released = false;
 
 	public MouseHandler(GamePanel gp) {
 		this.gp = gp;
@@ -22,12 +23,14 @@ public class MouseHandler extends MouseAdapter {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		mouseDown = true;
+		clicked = true;
+		released = false;
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		mouseDown = false;
+		released = true;
+		clicked = false;
 	}
 
 	@Override

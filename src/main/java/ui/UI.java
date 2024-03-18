@@ -16,7 +16,6 @@ public class UI {
 		switch (GamePanel.gameState) {
 		case TITLE_STATE:
 			ScreenInit.titleScreen.update(gp);
-			Screen.checkButtonClick(gp, ScreenInit.titleScreen.buttonList);
 			break;
 		case PLAY_STATE:
 			ScreenInit.gameScreen.update(gp);

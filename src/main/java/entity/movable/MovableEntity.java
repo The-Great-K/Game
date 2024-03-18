@@ -12,14 +12,14 @@ public abstract class MovableEntity extends Entity {
 	public double speed;
 
 	public MovableEntity(GamePanel gp, double x, double y, int width, int height) {
-		super(gp, x, y, width, height);
+		super(x, y, width, height);
 	}
 
 	public void move() {
 		moveY += Math.max(0.5, (fallTime / GamePanel.TPS) * gravity);
 
-		setX(getX() + moveX);
-		setY(getY() + moveY);
+		setX(getXAsDouble() + moveX);
+		setY(getYAsDouble() + moveY);
 	}
 
 	public double getSpeed() {
